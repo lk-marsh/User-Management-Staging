@@ -1,7 +1,7 @@
 import requests
 import re
 
-def get_last_login(token, emails):
+def get_last_login(token, emails, field):
     last_logins = []
 
     headers = {
@@ -15,7 +15,7 @@ def get_last_login(token, emails):
         response = requests.request("GET", url, headers=headers, data={}, files={})
 
         try:
-            last_login = re.findall('''.+"lastUpdated":"(.+?Z)"''', response.text)[0]
+            last_login = re.findall('''.+"{}":"(.+?Z)"'''.format(field), response.text)[0]
         except: 
             last_login = "error getting last login"
             print( "error getting last login for:" , email , response.text )

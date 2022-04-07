@@ -9,6 +9,10 @@ email_file = r"C:\Users\u1261919\OneDrive - MMC\Documents\user-management-stagin
 csv_file = r"C:\Users\u1261919\OneDrive - MMC\Documents\user-management-staging\User-Management-Staging\users-last-login.csv"
 days_before_expiry = 6
 
+# Change to lastLogin to find the last login time, but I think it is not that accurate
+field = "lastUpdated" 
+# field = "lastLogin"
+
 #get access token
 token = get_token.token()
 
@@ -17,7 +21,7 @@ emails = get_emails.emails(email_file)
 
 #determine if emails are outdated
 if token:
-    last_logins = get_user_last_login.get_last_login(token, emails)
+    last_logins = get_user_last_login.get_last_login(token, emails, field)
     outdated = determine_outdated_account.outdated_account(last_logins, days_before_expiry)
 
 fh = open(csv_file , 'w')
