@@ -1,9 +1,7 @@
-from contextlib import nullcontext
 import requests
 import re
 
-def token(): 
-    url = "https://staging2.api.m2digitalbroker.com/proxy/amps/v2/oauth/accesstoken"
+def token(url): 
     headers = {
         'appId': 'VMP-DI',
         'grant_type': 'client_credentials',
@@ -11,10 +9,9 @@ def token():
             }
 
     response = requests.request("GET", url, headers=headers, data={})
-
-    try:
+    if response: 
         user_token = re.findall('''.+"access_token" : "(.+)?",''',response.text)[0]
-    except:
+    else:
         user_token = None 
         print("error: Failed to get access token")
 
