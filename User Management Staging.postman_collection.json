@@ -1,0 +1,995 @@
+{
+	"info": {
+		"_postman_id": "e90c1518-9515-44d2-a870-5faac9a64ef1",
+		"name": "User Management Staging",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Access Token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "nC3JsHlQkp2vAS53",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "Y1rJeO1VJyh9VpOTtyiDYgV2AAvQ6TWY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "appId",
+						"value": "VMP-DI",
+						"type": "text"
+					},
+					{
+						"key": "grant_type",
+						"value": "client_credentials",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://staging2.api.m2digitalbroker.com/proxy/amps/v2/oauth/accesstoken",
+					"protocol": "https",
+					"host": [
+						"staging2",
+						"api",
+						"m2digitalbroker",
+						"com"
+					],
+					"path": [
+						"proxy",
+						"amps",
+						"v2",
+						"oauth",
+						"accesstoken"
+					]
+				},
+				"description": "Get Access Token"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Details",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "qAMAGyrDx51kfsk7Qx5O1W4LcKA5",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "login",
+						"value": "mahesh.cv@marsh.com",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://staging2.api.m2digitalbroker.com/proxy/amps/v2/uam/users?login=1207120",
+					"protocol": "https",
+					"host": [
+						"staging2",
+						"api",
+						"m2digitalbroker",
+						"com"
+					],
+					"path": [
+						"proxy",
+						"amps",
+						"v2",
+						"uam",
+						"users"
+					],
+					"query": [
+						{
+							"key": "login",
+							"value": "1207120"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Group",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const tokenUrl = 'https://staging2.api.m2digitalbroker.com/proxy/amps/v2/oauth/accesstoken';\r",
+							"\r",
+							"const clientId = 'Y1rJeO1VJyh9VpOTtyiDYgV2AAvQ6TWY';\r",
+							"const clientSecret = 'nC3JsHlQkp2vAS53';\r",
+							"\r",
+							"const getTokenRequest = {\r",
+							"  method: 'POST',\r",
+							"  url: tokenUrl,\r",
+							"  body: {\r",
+							"      mode: 'formdata',\r",
+							"      formdata: [\r",
+							"          { key: 'grant_type', value: 'client_credentials' },\r",
+							"          { key: 'appId', value: 'VMP-DI' },\r",
+							"          { key: 'client_id', value: clientId },\r",
+							"          { key: 'client_secret', value: clientSecret }\r",
+							"      ]\r",
+							"  }\r",
+							"};\r",
+							"\r",
+							"pm.sendRequest(getTokenRequest, (err, response) => {\r",
+							"  const jsonResponse = response.json();\r",
+							"  const newAccessToken = jsonResponse.access_token;\r",
+							"  \r",
+							"  pm.variables.set('access_token', newAccessToken);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "b8Sz88OVTVjzFb0S9BqY0P1NJ36j",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://services.staging.api.m2digitalbroker.com/proxy/amps/v2/uam/groups?login=1240896",
+					"protocol": "https",
+					"host": [
+						"services",
+						"staging",
+						"api",
+						"m2digitalbroker",
+						"com"
+					],
+					"path": [
+						"proxy",
+						"amps",
+						"v2",
+						"uam",
+						"groups"
+					],
+					"query": [
+						{
+							"key": "login",
+							"value": "1240896"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer pVlPDN0Qk5bLctuznHK8UA8vkFRo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"roptions\": {\n        \"activate\": true\n    },\n    \"profile\": {\n        \"firstName\": \"Mahesh\",\n        \"lastName\": \"CV\",\n        \"login\": \"rush2anithamahesh@gmail.com\",\n        \"email\": \"rush2anithamahesh@gmail.com\",\n        \"locale\":\"ja_JP\"\n    },\n    \"credentials\": {\n        \"password\": {\n            \"value\": \"Welcome@Amps123\"\n        }\n    },\n    \"groupIds\": [\n        \"00gqgxur22o9wKQfw0h7\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://services.staging2.api.m2digitalbroker.com/proxy/amps/v2/uam/users",
+					"protocol": "https",
+					"host": [
+						"services",
+						"staging2",
+						"api",
+						"m2digitalbroker",
+						"com"
+					],
+					"path": [
+						"proxy",
+						"amps",
+						"v2",
+						"uam",
+						"users"
+					],
+					"query": [
+						{
+							"key": "body",
+							"value": "{\n    \"roptions\": {\n        \"activate\": True\n    },\n    \"profile\": {\n        \"firstName\": \"mahesh\",\n        \"lastName\": \"CV\",\n        \"login\": \"rush2cvmahesh1@gmail.com\"\n    } \n}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Initiate Activate User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Z8QagrrEUsq0r0kYvGVkqrG6zGJz",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "login",
+						"value": "mahesh.cv@marsh.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "grantType",
+						"value": "client_credentials",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "appId",
+						"value": "VMP-DI",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "login",
+							"value": "mahesh.cv@marsh.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "appId",
+							"value": "VMP-DI",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "groupId",
+							"value": "VMPUAT_Admin_Users",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "profile",
+							"value": "{\n\t\"firstName\": \"Sonali\",\n\t\"lastName\": \"Bengal\",\n\t\"mobilePhone\": \"6598765432\",\n\t\"secondEmail\": \"\",\n\t\"login\": \"Sonali.Bangal@marsh.com,\n\t\"email\": \"Sonali.Bangal@marsh.com,\n\t\"CIAM_idp\":\"\"\n}",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "credentials",
+							"value": "{\n\t\"password\":\"p6eDl6o9WTFIRzhCmtqqgUKWX0dW\"\n}",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "login",
+							"value": "mahesh.cv@marsh.com",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://staging2.api.m2digitalbroker.com/proxy/amps/v2/uam/initresetpswd?login=rush2cvmahesh@gmail.com&firstName=Mahesh&lastName=CV",
+					"protocol": "https",
+					"host": [
+						"staging2",
+						"api",
+						"m2digitalbroker",
+						"com"
+					],
+					"path": [
+						"proxy",
+						"amps",
+						"v2",
+						"uam",
+						"initresetpswd"
+					],
+					"query": [
+						{
+							"key": "login",
+							"value": "rush2cvmahesh@gmail.com"
+						},
+						{
+							"key": "firstName",
+							"value": "Mahesh"
+						},
+						{
+							"key": "lastName",
+							"value": "CV"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "xoEPqPp6T0lKnOmtSwjlM7Ha79eO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "login",
+						"value": "mahesh.cv@marsh.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "grantType",
+						"value": "client_credentials",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "appId",
+						"value": "VMP-DI",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "login",
+							"value": "mahesh.cv@marsh.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "appId",
+							"value": "VMP-DI",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "groupId",
+							"value": "VMPUAT_Admin_Users",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "profile",
+							"value": "{\n\t\"firstName\": \"Sonali\",\n\t\"lastName\": \"Bengal\",\n\t\"mobilePhone\": \"6598765432\",\n\t\"secondEmail\": \"\",\n\t\"login\": \"Sonali.Bangal@marsh.com,\n\t\"email\": \"Sonali.Bangal@marsh.com,\n\t\"CIAM_idp\":\"\"\n}",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "credentials",
+							"value": "{\n\t\"password\":\"p6eDl6o9WTFIRzhCmtqqgUKWX0dW\"\n}",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "login",
+							"value": "mahesh.cv@marsh.com",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://services.staging2.api.m2digitalbroker.com/proxy/amps/v2/uam/initactivateuser?login=Praveen.Ramasamy-Selvaraj@marsh.com",
+					"protocol": "https",
+					"host": [
+						"services",
+						"staging2",
+						"api",
+						"m2digitalbroker",
+						"com"
+					],
+					"path": [
+						"proxy",
+						"amps",
+						"v2",
+						"uam",
+						"initactivateuser"
+					],
+					"query": [
+						{
+							"key": "login",
+							"value": "Praveen.Ramasamy-Selvaraj@marsh.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AssignGroup",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "xoEPqPp6T0lKnOmtSwjlM7Ha79eO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "login",
+						"value": "mahesh.cv@marsh.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "grantType",
+						"value": "client_credentials",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "appId",
+						"value": "VMP-DI",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \r\n {\r\n \"groupId\": \"00gxinnmifLj6yvgN0h7\",\r\n \"login\":\"<email id>/mgd id\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://staging.api.m2digitalbroker.com/proxy/amps/v2/uam/groups",
+					"protocol": "https",
+					"host": [
+						"staging",
+						"api",
+						"m2digitalbroker",
+						"com"
+					],
+					"path": [
+						"proxy",
+						"amps",
+						"v2",
+						"uam",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UnAssignGroup",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "xoEPqPp6T0lKnOmtSwjlM7Ha79eO",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "login",
+						"value": "mahesh.cv@marsh.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "grantType",
+						"value": "client_credentials",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "appId",
+						"value": "VMP-DI",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " \r\n {\r\n \"groupId\": \"00gxinnmifLj6yvgN0h7\",\r\n \"login\":\"<email id>/mgd id\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://services.staging2.api.m2digitalbroker.com/proxy/amps/v2/uam/groups",
+					"protocol": "https",
+					"host": [
+						"services",
+						"staging2",
+						"api",
+						"m2digitalbroker",
+						"com"
+					],
+					"path": [
+						"proxy",
+						"amps",
+						"v2",
+						"uam",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Initiate Reset Password",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "A7LwGzNwk4IchG7BOQfNpoPzsjGV",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "login",
+						"value": "mahesh.cv@marsh.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "grantType",
+						"value": "client_credentials",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "appId",
+						"value": "VMP-DI",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "login",
+							"value": "mahesh.cv@marsh.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "appId",
+							"value": "VMP-DI",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "groupId",
+							"value": "VMPUAT_Admin_Users",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "profile",
+							"value": "{\n\t\"firstName\": \"Sonali\",\n\t\"lastName\": \"Bengal\",\n\t\"mobilePhone\": \"6598765432\",\n\t\"secondEmail\": \"\",\n\t\"login\": \"Sonali.Bangal@marsh.com,\n\t\"email\": \"Sonali.Bangal@marsh.com,\n\t\"CIAM_idp\":\"\"\n}",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "credentials",
+							"value": "{\n\t\"password\":\"p6eDl6o9WTFIRzhCmtqqgUKWX0dW\"\n}",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "login",
+							"value": "mahesh.cv@marsh.com",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://staging2.api.m2digitalbroker.com/proxy/amps/v2/uam/resetpswd?login=rush2cvmahesh@gmail.com&firstName=Mahesh&lastName=CV",
+					"protocol": "https",
+					"host": [
+						"staging2",
+						"api",
+						"m2digitalbroker",
+						"com"
+					],
+					"path": [
+						"proxy",
+						"amps",
+						"v2",
+						"uam",
+						"resetpswd"
+					],
+					"query": [
+						{
+							"key": "login",
+							"value": "rush2cvmahesh@gmail.com"
+						},
+						{
+							"key": "firstName",
+							"value": "Mahesh"
+						},
+						{
+							"key": "lastName",
+							"value": "CV"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password with recovery token",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "A7LwGzNwk4IchG7BOQfNpoPzsjGV",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "login",
+						"value": "mahesh.cv@marsh.com",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "grantType",
+						"value": "client_credentials",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "appId",
+						"value": "VMP-DI",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "login",
+							"value": "mahesh.cv@marsh.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "appId",
+							"value": "VMP-DI",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "groupId",
+							"value": "VMPUAT_Admin_Users",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "profile",
+							"value": "{\n\t\"firstName\": \"Sonali\",\n\t\"lastName\": \"Bengal\",\n\t\"mobilePhone\": \"6598765432\",\n\t\"secondEmail\": \"\",\n\t\"login\": \"Sonali.Bangal@marsh.com,\n\t\"email\": \"Sonali.Bangal@marsh.com,\n\t\"CIAM_idp\":\"\"\n}",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "credentials",
+							"value": "{\n\t\"password\":\"p6eDl6o9WTFIRzhCmtqqgUKWX0dW\"\n}",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "login",
+							"value": "mahesh.cv@marsh.com",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://staging2.api.m2digitalbroker.com/proxy/amps/v2/uam/initactivateuser?login=rush2cvmahesh@gmail.com&firstName=Mahesh&lastName=CV",
+					"protocol": "https",
+					"host": [
+						"staging2",
+						"api",
+						"m2digitalbroker",
+						"com"
+					],
+					"path": [
+						"proxy",
+						"amps",
+						"v2",
+						"uam",
+						"initactivateuser"
+					],
+					"query": [
+						{
+							"key": "login",
+							"value": "rush2cvmahesh@gmail.com"
+						},
+						{
+							"key": "firstName",
+							"value": "Mahesh"
+						},
+						{
+							"key": "lastName",
+							"value": "CV"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
