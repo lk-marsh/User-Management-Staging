@@ -1,5 +1,5 @@
 import requests
-import re
+import json
 
 def token(url): 
     headers = {
@@ -10,10 +10,11 @@ def token(url):
 
     response = requests.request("GET", url, headers=headers, data={})
     if response: 
-        user_token = re.findall('''.+"access_token" : "(.+)?",''',response.text)[0]
+        user_token = json.loads(response.text)["access_token"]
+        # user_token = re.findall('''.+"access_token" : "(.+)?",''',response.text)[0]
     else:
         user_token = None 
-        print("error: Failed to get access token")
+        print("error: Failed to get access token", response)
 
     return user_token
 

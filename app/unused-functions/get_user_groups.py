@@ -17,7 +17,7 @@ def get_groups(url, token, emails):
         if response: 
             user_groups.append(response.text)
         else:
-            print("error getting user group for:" , email)
+            print("error getting user group for:" , email, response)
             user_groups.append("error getting user group")
     
     return user_groups
