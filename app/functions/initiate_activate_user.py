@@ -32,5 +32,4 @@ def initiate_activate(url, token, user_emails, user_names):
             print("error getting activate token for",user_emails[i], response)
             activate_token = "error getting activate token"
 
-    print(activate_tokens)
     return activate_tokens

@@ -22,5 +22,3 @@ def get_details(url, token, emails):
             details.append("error getting user details")
     
     return (details)
-
-# print(get_details("https://staging2.api.m2digitalbroker.com/proxy/amps/v2/uam/users?login={}&=", "5x0ZAAqTCQXlsSq0oJHHTKHlzdFG", ["leng-khai.ang@marsh.com" , "mahesh.cv@marsh.com"]))
