@@ -28,6 +28,7 @@ log_inactive_emails.log_emails(env["INACTIVE_USERS_CSV_FILE"] , inactive_emails)
 
 if len(inactive_emails) > 0:
     decision = input("There are {} inactive emails. Would you like to renew them? \ny - renew \nn - do not renew\n".format(len(inactive_emails))).strip().capitalize()
+    
     if decision == "Y": 
         # Get the payload for the request to reset/activate 
         inactive_user_details = get_user_details.get_details(env["GET_DETAILS_URL"], token, inactive_emails)
@@ -35,7 +36,9 @@ if len(inactive_emails) > 0:
 
         recovery_tokens = initiate_reset_password.initiate_reset(env["INITIATE_ACTIVATE_USER_URL"], token, inactive_emails, inactive_names)
         activate_user_or_password_reset.activate_or_reset(env["ACTIVATE_USER_OR_RESET_PASSWORD_URL"], token, inactive_emails, inactive_names, recovery_tokens, ["Wel@AmpWers123","Wel@AmpWers123"])
+        
         print('done!')
+    
     else:
         print('done!')
     
