@@ -1,10 +1,10 @@
 import zulu
 
-def outdated_account(last_logins, days_before_expiry):
+def outdated_account(last_logins:list, days_before_expiry:str) -> list:
     current_time = zulu.now()
     six_days_ago = current_time.shift(days = -int(days_before_expiry))
 
-    outdated = []
+    outdated:list = []
 
     for login in last_logins:
         try:

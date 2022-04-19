@@ -2,12 +2,12 @@ import json
 import requests
 
 # Returns a list of activation tokens
-def initiate_activate(url, token, user_emails, user_names): 
+def initiate_activate(url, token, user_emails, user_names) -> list: 
     names = user_names
     first_names = names[0]
     last_names = names[1]
 
-    activate_tokens = []
+    activate_tokens:list = []
 
     for i in range(len(user_emails)): 
         payload = json.dumps({

@@ -1,8 +1,8 @@
 import requests
 import json
 
-def activate_or_reset(url, token, user_emails, user_names, user_tokens, new_passwords):
-    statuses = []
+def activate_or_reset(url:str, token:str, user_emails:list, user_names:list, user_tokens:list, new_passwords:list) -> list:
+    statuses:list = []
 
     for i in range(len(user_emails)):
         payload = json.dumps({

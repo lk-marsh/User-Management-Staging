@@ -1,5 +1,5 @@
-def find_emails(emails, statuses):
-    inactive_emails = []
+def find_emails(emails:list, statuses:list) -> list:
+    inactive_emails:list = []
 
     for i in range(len(emails)): 
         print(emails[i], ':', statuses[i])

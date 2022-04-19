@@ -1,7 +1,7 @@
 import requests
 import json
 
-def token(url): 
+def token(url:str) -> str: 
     headers = {
         'appId': 'VMP-DI',
         'grant_type': 'client_credentials',

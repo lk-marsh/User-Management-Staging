@@ -1,7 +1,7 @@
 import requests
 
-def get_groups(url, token, emails):
-    user_groups = []
+def get_groups(url:str, token:str, emails:list) -> list:
+    user_groups:list = []
 
     for email in emails:
         

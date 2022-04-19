@@ -1,9 +1,9 @@
 # Since name is given in the user details 
 from . import get_user_details
 
-def get_name(details):
-    first_names = []
-    last_names = []
+def get_name(details:list) -> list[list, list]:
+    first_names:list = []
+    last_names:list = []
 
     for detail in details:
         try:

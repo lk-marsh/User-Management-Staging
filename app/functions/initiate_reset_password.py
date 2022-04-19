@@ -2,12 +2,12 @@ import json
 import requests
 
 # Returns a list of reset tokens
-def initiate_reset(url, token, user_emails, user_names): 
-    names = user_names
-    first_names = names[0]
-    last_names = names[1]
+def initiate_reset(url:str, token:str, user_emails:list, user_names:list) -> list: 
+    names:list = user_names
+    first_names:list = names[0]
+    last_names:list = names[1]
 
-    reset_tokens = []
+    reset_tokens:list = []
 
     for i in range(len(user_emails)): 
         payload = json.dumps({

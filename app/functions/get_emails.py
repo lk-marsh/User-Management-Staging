@@ -1,5 +1,5 @@
-def emails(email_file):
-    email_list = []
+def emails(email_file:str) -> list:
+    email_list:list = []
     fh = open(email_file , 'r')
     if fh:
         for line in fh:

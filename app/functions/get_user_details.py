@@ -2,8 +2,8 @@ import requests
 import json
 
 # Returns a list of python dictionary of user's details
-def get_details(url, token, emails):
-    details = []
+def get_details(url:str, token:str, emails:list) -> list:
+    details:list = []
 
     headers = {
         'Authorization': 'Bearer {}'.format(token),
