@@ -1,7 +1,3 @@
-# Since last login is given in the user details
-from . import get_user_details
-
-
 def get_last_login(details: list, field: str) -> list:
     last_logins: list = []
 
