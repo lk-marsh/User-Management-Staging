@@ -1,7 +1,7 @@
 # Returns a 2-dimensional list of first and last names
-def get_name(details:list) -> list[list, list]:
-    first_names:list = []
-    last_names:list = []
+def get_name(details: list) -> list[list, list]:
+    first_names: list = []
+    last_names: list = []
 
     for detail in details:
         try:
@@ -15,4 +15,3 @@ def get_name(details:list) -> list[list, list]:
         last_names.append(last_name)
 
     return [first_names, last_names]
-
