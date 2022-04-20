@@ -7,6 +7,7 @@ def initiate_activate(url, token, user_emails, user_names) -> list:
         print("Error: Email and Names lists don't match.")
         return
 
+    # Get details that are required in the payload
     names = user_names
     first_names = names[0]
     last_names = names[1]
@@ -14,6 +15,7 @@ def initiate_activate(url, token, user_emails, user_names) -> list:
     activate_tokens:list = []
 
     for i in range(len(user_emails)): 
+        # Following payload and headers given by Postman
         payload = json.dumps({
             "login": user_emails[i],
             "firstName": first_names[i],
@@ -30,6 +32,7 @@ def initiate_activate(url, token, user_emails, user_names) -> list:
         response = requests.request("POST", url, headers=headers, data=payload)
 
         if response:
+            # Find value given by the "recoveryToken" key
             activate_token = json.loads(response.text)["recoveryToken"]
             activate_tokens.append(activate_token)
         else:

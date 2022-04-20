@@ -102,7 +102,7 @@ class TestToken(unittest.TestCase):
         self.assertEqual(handle.write.call_count, 3)
 
         # Header of CSV File
-        self.assertEqual(calls_list[0] , unittest.mock.call('inactive users\r\n') )
+        self.assertEqual(calls_list[0] , unittest.mock.call('inactive emails\r\n') )
 
         # Contents of CSV
         self.assertEqual(calls_list[1] , unittest.mock.call('inactive email 1\r\n') )

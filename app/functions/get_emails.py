@@ -1,3 +1,4 @@
+# Reads from a file handler of a text file containing emails, then returns a list of emails
 def emails(fh) -> list:
     email_list:list = []
     if fh:
