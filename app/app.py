@@ -11,7 +11,7 @@ from functions import get_token, get_emails ,get_user_details, get_user_status, 
 token:str = get_token.token(env["GET_ACCESS_TOKEN_URL"])
 
 # Get list of emails
-emails:list = get_emails.emails(env["EMAIL_FILE"])
+emails:list = get_emails.emails(open(env["EMAIL_FILE"] , 'r'))
 
 # Get user details
 details:list = get_user_details.get_details(env["GET_DETAILS_URL"], token, emails)
@@ -23,7 +23,7 @@ statuses:list = get_user_status.get_status(details)
 inactive_emails:list = find_inactive_emails.find_emails(emails, statuses)
 
 # Write inactive emails to CSV file
-log_inactive_emails.log_emails(env["INACTIVE_USERS_CSV_FILE"] , inactive_emails)
+log_inactive_emails.log_emails(open(env["INACTIVE_USERS_CSV_FILE"], 'w') , inactive_emails)
 
 if len(inactive_emails) > 0:
     decision = input("There are {} inactive emails. Would you like to renew them? \ny - renew \nn - do not renew\n".format(len(inactive_emails))).strip().capitalize()

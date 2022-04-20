@@ -1,11 +1,10 @@
-def emails(email_file:str) -> list:
+def emails(fh) -> list:
     email_list:list = []
-    fh = open(email_file , 'r')
     if fh:
         for line in fh:
             email_list.append(line.strip())
 
         return email_list
     else:
-        print("failed to open", email_file)
+        print("failed to open", fh.name)
         return email_list

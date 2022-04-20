@@ -1,8 +1,6 @@
 import csv 
 
-def log_emails(file:str, emails:list) -> None:
-    fh = open(file, 'w')
-
+def log_emails(fh, emails:list) -> None:
     if fh:
         writer = csv.writer(fh)
         header = ['inactive users']
@@ -10,6 +8,6 @@ def log_emails(file:str, emails:list) -> None:
         writer.writerow(header)
         for email in emails:
             writer.writerow([email])
-        print("Logged inactive emails to",file)
+        print("Logged inactive emails to",fh.name)
     else:
-        print("error opening file",file)
+        print("error opening file",fh.name)

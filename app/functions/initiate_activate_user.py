@@ -3,6 +3,10 @@ import requests
 
 # Returns a list of activation tokens
 def initiate_activate(url, token, user_emails, user_names) -> list: 
+    if len(user_emails) != len(user_names):
+        print("Error: Email and Names lists don't match.")
+        return
+
     names = user_names
     first_names = names[0]
     last_names = names[1]
@@ -31,5 +35,6 @@ def initiate_activate(url, token, user_emails, user_names) -> list:
         else:
             print("error getting activate token for",user_emails[i], response)
             activate_token = "error getting activate token"
+            activate_tokens.append(activate_token)
 
     return activate_tokens

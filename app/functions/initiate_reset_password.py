@@ -3,6 +3,10 @@ import requests
 
 # Returns a list of reset tokens
 def initiate_reset(url:str, token:str, user_emails:list, user_names:list) -> list: 
+    if len(user_emails) != len(user_names):
+        print("Error: Email and Names lists don't match.")
+        return
+
     names:list = user_names
     first_names:list = names[0]
     last_names:list = names[1]
